@@ -79,12 +79,10 @@ public class FXMLExploredPageController implements Initializable {
 
     //=>a chaque reseau social, son depth et sa liste de keywords;
     private HashMap<String,Pair<Integer,ArrayList<String>>> tasksExtraction = new HashMap<>();
-    private ArrayList<Community> communities;
     private HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
     private HashMap<String,String> communityNameAttribution = new HashMap<>();
     private HashMap<String,ArrayList<Integer>> communityAttribution ;
     private TwitterExtraction extractAtt;
-    private LeadersTimeline opinionDetectionAtt;
     //ADDED for export excel
     private ArrayList<Double> rank;
     private HashMap<Integer,Long> inverse;

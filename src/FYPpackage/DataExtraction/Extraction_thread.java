@@ -368,20 +368,20 @@ public class Extraction_thread implements Runnable {
        
    }
    
-   private void storeFollowers(Long idAccount,List<Long> followers,int location,int following) //if location ==-1 store them in db and followers else store them in followers
-   {
-       
-       if(location==-1){
-           
-            store= new PostgresStore("twitter");
-            store.insert(idAccount,(ArrayList<Long>) followers,following);
-            store.close();
-       }
-       Pair<ArrayList<Long>,Integer> followers_following = new Pair<>((ArrayList<Long>)followers,following);
-       this.followers.put(idAccount, (ArrayList<Long>) followers);
-       //added
-       this.new_followers.put(idAccount,followers_following);
-   }
+//   private void storeFollowers(Long idAccount,List<Long> followers,int location,int following) //if location ==-1 store them in db and followers else store them in followers
+//   {
+//       
+//       if(location==-1){
+//           
+//            store= new PostgresStore("twitter");
+//            store.insert(idAccount,(ArrayList<Long>) followers,following);
+//            store.close();
+//       }
+//       Pair<ArrayList<Long>,Integer> followers_following = new Pair<>((ArrayList<Long>)followers,following);
+//       this.followers.put(idAccount, (ArrayList<Long>) followers);
+//       //added
+//       this.new_followers.put(idAccount,followers_following);
+//   }
    private void storeFollowers(Long idAccount,List<Long> followers,int location) //if location ==-1 store them in db and followers else store them in followers
    {
        
@@ -396,11 +396,8 @@ public class Extraction_thread implements Runnable {
    }
  
    
-   public void finalize()
-    {
-       // store.close();
-    }
      
+   @Override
    public void run()
    {
         TwitterDataExtraction extract;
@@ -433,7 +430,7 @@ public class Extraction_thread implements Runnable {
             attribution    = new ArrayList<>();
             
             Long aTraiter ;
-            int following =-1; 
+//            int following =-1; 
  
             while((aTraiter=pile.remove(0))!=-1) //men chil le 1er element;
             {
@@ -520,75 +517,75 @@ public class Extraction_thread implements Runnable {
         //store.close();
    }
 
-    private int getFollowing(Long aTraiter)
-    {
-       int following=-1;
-       User user ;
-       int k =0;
-       RateLimitStatus status = null;
-       TwitterDataExtraction extract;
-        //extract = new RealEntity(twitter);
-        
-       //extract = new RealEntity();
-        extract = new DummyEntity();
-
-       for(int i=appStartPoint;i>=0;i=appStartPoint+k%appSize)
-       {
-                     System.out.println("\n using  "+i+" em application to getFollowing");
-                     //twitter4j.Twitter twitter = list_app.get(i).getTwitterConf();
-                     //extract.setTwitterAccount(twitter);
-                    
-        
-                    // status = twitter.getRateLimitStatus("followers").get("/followers/ids");
-                    try{
-                        //status = twitter.getRateLimitStatus("users").get("/users/lookup");
-                        status = extract.getRateLimitStatus("users").get("/users/lookup");
-                    }
-                    catch(TwitterException ex2){
-                        try {
-                                // thread to sleep for 1000 milliseconds
-                                System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                            
-                                Thread.sleep(900000);
-                                System.out.println("thread of "+this.keyword+ " woke up");
-                                continue;
-                        }
-                        catch(Exception e)
-                        {
-                                System.out.println("thread couldn't sleep while getting following of account");
-                        }   
-                    }
-				
-                    if(status.getRemaining()>0)
-                    {
-                       try
-                       {
-                            //ResponseList<User> response = twitter.lookupUsers(aTraiter);
-                            ResponseList<User> response = extract.lookupUsers(aTraiter);                           
-                            
-                            if(response.size()!=0)
-                            {                //added
-                                user = response.get(0);
-                                if(!users.containsKey(user.getId()))
-                                    users.put(user.getId(), user);
-                                
-                                following = response.get(0).getFriendsCount();
-                            }
-                            //if we didn't have following so the account is private
-                            break;
-                       }
-                       catch (TwitterException ex1)
-                       { //its a private account so we couldn't retrieve its following;
-                            System.out.println("cannot retrieve following of that private account "+aTraiter);
-                           // Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex1);
-                            break;
-                       }        
-                    }
-                    else
-                    {
-                        k++;
-                    }
-       }
-       return following;
-    }
+//    private int getFollowing(Long aTraiter)
+//    {
+//       int following=-1;
+//       User user ;
+//       int k =0;
+//       RateLimitStatus status = null;
+//       TwitterDataExtraction extract;
+//        //extract = new RealEntity(twitter);
+//        
+//       //extract = new RealEntity();
+//        extract = new DummyEntity();
+//
+//       for(int i=appStartPoint;i>=0;i=appStartPoint+k%appSize)
+//       {
+//                     System.out.println("\n using  "+i+" em application to getFollowing");
+//                     //twitter4j.Twitter twitter = list_app.get(i).getTwitterConf();
+//                     //extract.setTwitterAccount(twitter);
+//                    
+//        
+//                    // status = twitter.getRateLimitStatus("followers").get("/followers/ids");
+//                    try{
+//                        //status = twitter.getRateLimitStatus("users").get("/users/lookup");
+//                        status = extract.getRateLimitStatus("users").get("/users/lookup");
+//                    }
+//                    catch(TwitterException ex2){
+//                        try {
+//                                // thread to sleep for 1000 milliseconds
+//                                System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                            
+//                                Thread.sleep(900000);
+//                                System.out.println("thread of "+this.keyword+ " woke up");
+//                                continue;
+//                        }
+//                        catch(Exception e)
+//                        {
+//                                System.out.println("thread couldn't sleep while getting following of account");
+//                        }   
+//                    }
+//				
+//                    if(status.getRemaining()>0)
+//                    {
+//                       try
+//                       {
+//                            //ResponseList<User> response = twitter.lookupUsers(aTraiter);
+//                            ResponseList<User> response = extract.lookupUsers(aTraiter);                           
+//                            
+//                            if(response.size()!=0)
+//                            {                //added
+//                                user = response.get(0);
+//                                if(!users.containsKey(user.getId()))
+//                                    users.put(user.getId(), user);
+//                                
+//                                following = response.get(0).getFriendsCount();
+//                            }
+//                            //if we didn't have following so the account is private
+//                            break;
+//                       }
+//                       catch (TwitterException ex1)
+//                       { //its a private account so we couldn't retrieve its following;
+//                            System.out.println("cannot retrieve following of that private account "+aTraiter);
+//                           // Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex1);
+//                            break;
+//                       }        
+//                    }
+//                    else
+//                    {
+//                        k++;
+//                    }
+//       }
+//       return following;
+//    }
 
 }

@@ -35,41 +35,12 @@ public class PostgresStore extends Store{
             System.out.println("not able to connect to postgres server");        
         }
     }
-    public static void main(String args[]) {
-        Connection con = null;
-        PreparedStatement pst = null;
-
-        String url = "jdbc:postgresql://localhost/twitter";
-        String user = "postgres";
-        String password = "cdiasg2017";
-
-        try {
-
-            ArrayList<Long>followers = new ArrayList<>();
-            con = DriverManager.getConnection(url, user, password);
-
-            String stm = "select id from followed_followers";
-            pst = con.prepareStatement(stm);
-             ResultSet result = pst.executeQuery();
-             while (result.next())
-                {
-                    Long outArray = result.getLong("id");
-                    followers.add(outArray);
-                    
-                }
-             for(int i=0;i<followers.size();++i)
-                    System.out.println(followers.get(i));
-             
-        } catch (SQLException ex) {
-          System.out.println("exception");
-        }   
-  }
-
     @Override
     public boolean exist(Long id) {
-        PreparedStatement pst = null;
+        
         String stm = "select id from followed_followers where followed=?";
         try { 
+            PreparedStatement pst;
             pst = con.prepareStatement(stm);
             pst.setLong(1, id);
             ResultSet result = pst.executeQuery();

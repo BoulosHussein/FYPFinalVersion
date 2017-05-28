@@ -86,10 +86,9 @@ public class FXMLNewRunPageController implements Initializable {
 
     
     
-    private ArrayList<String> tasks = new ArrayList<>();
     //=>a chaque reseau social, son depth et sa liste de keywords;
     private HashMap<String,Pair<Integer,ArrayList<String>>> tasksExtraction = new HashMap<>();
-    ArrayList<PieChart.Data> data;
+//    ArrayList<PieChart.Data> data;
     private ArrayList<Community> communities;
     private HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
     private HashMap<String,String> communityNameAttribution = new HashMap<>();
