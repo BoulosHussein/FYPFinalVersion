@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="621.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication3.FXMLExploredPageController">
+   <children>
+      <Pane layoutX="-1.0" layoutY="600.0" prefHeight="21.0" prefWidth="787.0">
+         <children>
+            <ProgressBar fx:id="progressId" layoutX="1.0" layoutY="4.0" prefHeight="18.0" prefWidth="348.0" progress="0.0" />
+            <Label fx:id="progressLabelId" layoutX="351.0" layoutY="3.0" text="initialising" />
+         </children>
+      </Pane>
+      <ScrollPane fx:id="scrollId" disable="true" layoutX="14.0" layoutY="33.0" prefHeight="488.0" prefWidth="750.0" stylesheets="@chartPie.css">
+         <content>
+            <VBox fx:id="vboxId" prefHeight="469.0" prefWidth="693.0" spacing="30.0">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </VBox>
+         </content>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </ScrollPane>
+      <Button fx:id="advancedButtonId" disable="true" layoutX="580.0" layoutY="545.0" mnemonicParsing="false" onAction="#advancedButtonHandler" text="AdvancedSearch" />
+   </children>
+</AnchorPane>

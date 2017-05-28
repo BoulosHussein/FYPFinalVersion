@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="550.0" maxWidth="668.0" minHeight="498.0" minWidth="668.0" prefHeight="498.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication3.FXMLNewRunPageController">
+   <children>
+      <Pane layoutY="482.0" prefHeight="16.0" prefWidth="668.0">
+         <children>
+            <ProgressBar fx:id="progressId" layoutY="-1.0" prefHeight="18.0" prefWidth="345.0" progress="0.0" />
+            <Label fx:id="progressLabelId" layoutX="354.0" text="status" />
+         </children>
+      </Pane>
+      <Pane fx:id="containerId" disable="true" layoutX="37.0" layoutY="11.0" prefHeight="447.0" prefWidth="594.0">
+         <children>
+            <Button fx:id="exportId" layoutX="69.0" layoutY="406.0" mnemonicParsing="false" onAction="#exportHandle" prefHeight="25.0" prefWidth="85.0" text="Export" />
+            <Button fx:id="printId" layoutX="197.0" layoutY="406.0" mnemonicParsing="false" onAction="#printHandle" prefHeight="25.0" prefWidth="85.0" text="Print" />
+            <Button fx:id="actionId" layoutX="324.0" layoutY="406.0" mnemonicParsing="false" onAction="#actionHandle" prefHeight="25.0" prefWidth="85.0" text="Action" />
+            <Button fx:id="showGraphId" layoutX="446.0" layoutY="406.0" mnemonicParsing="false" onAction="#showGraphHandle" prefHeight="25.0" prefWidth="85.0" text="Show Graph" />
+            <Label layoutX="130.0" layoutY="26.0" text="The opinion of each community for each keyword">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <BorderPane fx:id="borderpaneId" layoutX="92.0" layoutY="76.0" prefHeight="303.0" prefWidth="409.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

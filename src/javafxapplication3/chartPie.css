@@ -1,0 +1,118 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 15, 2017, 3:48:52 PM
+    Author     : generals
+*/
+/*
+.data0.line-chart { -fx-line-color: green; }  
+.data1.line-chart { -fx-line-color: red; }  
+.data2.line-chart { -fx-line-color: orange; }  
+.data3.line-chart { -fx-line-color: yellow; }  
+.data4.line-chart { -fx-line-color: black; }  
+.data5.line-chart { -fx-line-color: blue; }  
+.data6.line-chart { -fx-line-color: cyan; }  
+.data7.line-chart { -fx-line-color: darkGray; }  
+.data8.line-chart { -fx-line-color: gray; }  
+.data9.line-chart { -fx-line-color: magenta; }  
+.data10.line-chart { -fx-line-color: pink; }  
+*/
+/*
+.default-color0.chart-series-line{-fx-stroke: green;};
+.default-color1.chart-series-line{-fx-stroke: red;};
+.default-color2.chart-series-line{-fx-stroke: orange;};
+.default-color3.chart-series-line{-fx-stroke: yellow;};
+.default-color4.chart-series-line{-fx-stroke: black;};
+.default-color5.chart-series-line{-fx-stroke: blue;};
+.default-color6.chart-series-line{-fx-stroke: cyan;};
+.default-color7.chart-series-line{-fx-stroke: darkGray;};
+.default-color8.chart-series-line{-fx-stroke: gary;};
+.default-color9.chart-series-line{-fx-stroke: magenta;};
+.default-color10.chart-series-line{-fx-stroke: pink;};
+*/
+/*
+.default-color0.chart-bar{-fx-bar-fill: #00830;};
+.default-color1.chart-bar{-fx-bar-fill: #ff0000;};
+.default-color2.chart-bar{-fx-bar-fill: #ffa500;};
+.default-color3.chart-bar{-fx-bar-fill: #ffff00;};
+.default-color4.chart-bar{-fx-bar-fill: black;};
+.default-color5.chart-bar{-fx-bar-fill: blue;};
+.default-color6.chart-bar{-fx-bar-fill: cyan;};
+.default-color7.chart-bar{-fx-bar-fill: darkGray;};
+.default-color8.chart-bar{-fx-bar-fill: gary;};
+.default-color9.chart-bar{-fx-bar-fill: magenta;};
+.default-color10.chart-bar{-fx-bar-fill: pink;};
+*/
+/*
+.data0.bar-chart { -fx-bar-color: green; }  
+.data1.bar-chart { -fx-bar-color: red; }  
+.data2.bar-chart { -fx-bar-color: orange; }  
+.data3.bar-chart { -fx-bar-color: yellow; }  
+.data4.bar-chart { -fx-bar-color: black; }  
+.data5.bar-chart { -fx-bar-color: blue; }  
+.data6.bar-chart { -fx-bar-color: cyan; }  
+.data7.bar-chart { -fx-bar-color: darkGray; }  
+.data8.bar-chart { -fx-bar-color: gray; }  
+.data9.bar-chart { -fx-bar-color: magenta; }  
+.data10.bar-chart { -fx-bar-color: pink; } */ 
+
+.data0.chart-pie { -fx-pie-color: green; }  
+.data1.chart-pie { -fx-pie-color: red; }  
+.data2.chart-pie { -fx-pie-color: orange; }  
+.data3.chart-pie { -fx-pie-color: yellow; }  
+.data4.chart-pie { -fx-pie-color: black; }  
+.data5.chart-pie { -fx-pie-color: blue; }  
+.data6.chart-pie { -fx-pie-color: cyan; }  
+.data7.chart-pie { -fx-pie-color: darkGray; }  
+.data8.chart-pie { -fx-pie-color: gray; }  
+.data9.chart-pie { -fx-pie-color: magenta; }  
+.data10.chart-pie { -fx-pie-color: pink; }  
+
+.column-header-background { visibility: hidden; -fx-padding: -1em; }
+.scroll-pane {  -fx-background-color:transparent;}
+//control.setStyle{-fx-focus-color: transparent;};
+.table-cell {
+    -fx-font-size: 14px;
+}
+.defaultTableStyle { 
+    -fx-font-size: 14px;
+    -fx-base: rgb(0,0,0,0);
+    -fx-background-color: 
+        linear-gradient( to top, derive(-fx-color, 35.77966101694915%) 0%, derive(-fx-color, 10.05084745762713%) 50%, derive(-fx-color, -8.559322033898283%) 50.5%, derive(-fx-color, -30.0%) 100%);                   
+    -fx-background-image: url('low_contrast_linen.png');
+    -fx-background-color: rgba(0,0,0,.75);        
+    -fx-border-color: gray;
+    -fx-border-width: 1 1 0 0;
+}
+
+//
+.planAssigned { 
+    -fx-font-size: 12px;
+    -fx-base: rgb(0,0,0,0);
+    -fx-background-color: #347b34;
+    -fx-border-color: gray;
+    -fx-border-width: 1 1 0 0;
+}
+/* Format for row where a plan has not yet been assigned */
+.planNotAssigned { 
+    -fx-font-size: 30px;
+    -fx-base: rgb(0,0,0,0);
+    -fx-background-color: #983737;
+    -fx-border-color: gray;
+    -fx-border-width: 1 1 0 0;
+}
+
+/* Format for table row where container has arrived */ 
+.vfcRecovered {
+    -fx-font-size: 12px;
+    -fx-base: rgb(0,0,0,0);
+    -fx-background-color: 
+        linear-gradient( to top, derive(-fx-color, 35.77966101694915%) 0%, derive(-fx-color, 10.05084745762713%) 50%, derive(-fx-color, -8.559322033898283%) 50.5%, derive(-fx-color, -30.0%) 100%);                   
+    -fx-background-image: url('low_contrast_linen.png');
+    -fx-background-color: rgba(0,0,0,.75);        
+    -fx-border-color: gray;
+    -fx-border-width: 1 1 0 0;
+}
