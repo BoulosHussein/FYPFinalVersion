@@ -112,7 +112,6 @@ public class FXMLHomePageController implements Initializable {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
                     int new_val_i = (int)new_val.doubleValue();
-                    //twitterTextFieldDepthId.setText(String.format("%.2f", new_val));
                     twitterTextFieldDepthId.setText(""+new_val_i);
             }
         });
@@ -122,7 +121,6 @@ public class FXMLHomePageController implements Initializable {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
                     int new_val_i = (int)new_val.doubleValue();
-                    //facebookTextFieldDepthId.setText(String.format("%.2f", new_val));
                     facebookTextFieldDepthId.setText(""+new_val_i);
             }
         });
@@ -132,7 +130,6 @@ public class FXMLHomePageController implements Initializable {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
                     int new_val_i = (int)new_val.doubleValue();
-                    //linkedInTextFieldDepthId.setText(String.format("%.2f", new_val));
                     linkedInTextFieldDepthId.setText(""+new_val_i);
             }
         });
@@ -230,41 +227,12 @@ public class FXMLHomePageController implements Initializable {
                             public void run() {
                                 controller.setTasksExtraction(tasksExtraction);
                                 controller.run();
-//                                controller.createStatistics();
-                                //controller.setTaskExtraction(tasksExtraction);
-                                //controller.run();
                             }
                         });
                     }
                 });
                 stage.show();
                 System.out.println("Run page closed");
-//                controller.setTaskExtraction(tasksExtraction);
-
-                
-/*                
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLRunPage.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                FXMLRunPageController controller = (FXMLRunPageController) fxmlLoader.getController();
-                Stage stage = new Stage();
-                stage.setTitle("RUN PAGE");
-                stage.setScene(new Scene(root1));  
-                stage.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
-                    @Override
-                    public void handle(WindowEvent window) {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                controller.setTaskExtraction(tasksExtraction);
-                                controller.run();
-                            }
-                        });
-                    }
-                });
-                stage.show();
-                System.out.println("Run page closed");
-//                controller.setTaskExtraction(tasksExtraction);
-                */
             }
             else
             {

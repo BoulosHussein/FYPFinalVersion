@@ -132,43 +132,18 @@ public class TwitterExtraction extends Extraction {
                    
                }
                 
-//                for(Long key:runnableThread.get(j).new_followers.keySet())
-//                {
-//                    if(!new_list_followers.containsKey(key)){
-//                        new_list_followers.put(key, runnableThread.get(j).new_followers.get(key));
-//                    }
-//                }
-                
-                //added for users
-//                for(Long key:runnableThread.get(j).users.keySet())
-//                {
-//                    if(!users.containsKey(key)){
-//                        this.users.put(key, runnableThread.get(j).users.get(key));
-//                    }
-//                }
             }
             //attribute int to each id of the followers that hadn't been treated before;
             System.out.println("starting attribution");
-            //for(Long key : new_list_followers.keySet())
             for(Long key:list_followers.keySet())
             {
-//                ArrayList<Long> followersOf = list_followers.get(key);
+
                 if(!integrationGraph.containsKey(key)){
                     integrationGraph.put(key, accountsCount);
                     integrationGraphInvers.put(accountsCount,key);
                     accountsCount++;
                 }
-//                for(int k=0;k<new_list_followers.get(key).getL().size();++k)
-//                {
-//                    if(!integrationGraph.containsKey(new_list_followers.get(key).getL().get(k))){
-//                        integrationGraph.put(new_list_followers.get(key).getL().get(k),accountsCount);
-//                        integrationGraphInvers.put(accountsCount, new_list_followers.get(key).getL().get(k));
-//                        accountsCount++;
-//                    }
-//                }
             }
-           
-            
         }
         else
         {
@@ -184,46 +159,5 @@ public class TwitterExtraction extends Extraction {
 
     
     public void frameInitialise(){
-//        home_frame = new JFrame("Twitter Extraction");
-//        home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//       
-//        JPanel keywords_container= new JPanel();
-//        JPanel inputsContainer = new JPanel();
-//        JButton add_keywords = new JButton("+");
-//        //JButton add_keywords = new RoundButton("+");
-//        
-//        add_keywords.addActionListener(new ActionListener(){
-//
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//             JTextField text_field = new JTextField();
-//             //text_field
-//            }
-//        });
-//        
-//        inputsContainer.setLayout(new BoxLayout(inputsContainer,BoxLayout.Y_AXIS));
-//        inputsContainer.setBounds(25, 2, 35, 65);
-//
-//        add_keywords.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        add_keywords.setAlignmentY(Component.CENTER_ALIGNMENT);
-//        
-//        keywords_container.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        keywords_container.setAlignmentY(Component.CENTER_ALIGNMENT);
-//       
-//        inputsContainer.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        inputsContainer.setAlignmentY(Component.CENTER_ALIGNMENT);
-//
-//        keywords_container.add(inputsContainer);
-//        keywords_container.add(add_keywords);
-//        
-//        
-//        home_frame.add(keywords_container,BorderLayout.CENTER);
-//        
-//        home_frame.setSize(500,500);
-//        
-//        home_frame.pack();
-//        
-//        home_frame.setVisible(true);
-//        
     }
 }

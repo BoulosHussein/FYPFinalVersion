@@ -105,11 +105,6 @@ public class FXMLNewRunPageController implements Initializable {
     TwitterExtraction extract;
     ArrayList<String> keywordsOriginal ; //keywords
     
-//    public FXMLRunPageController(HashMap<String,Pair<Integer,ArrayList<String>>> tasksExtraction)
-//    {
-//        this.tasksExtraction = tasksExtraction;
-//    }
-//    
     public void setMap(HashMap<Integer,ArrayList<Integer>> map)
     {
         this.map = map;
@@ -147,70 +142,9 @@ public class FXMLNewRunPageController implements Initializable {
     public void run()
     {
             for(String reseauSocial: tasksExtraction.keySet()){
-//                ExecutionHandler  hndler = new ExecutionHandler(reseauSocial,tasksExtraction.get(reseauSocial).getL(),tasksExtraction.get(reseauSocial).getR(),null,progressBarId);              
                 Task <Void> task = new Task<Void>() {
                 @Override public Void call() throws InterruptedException {
 
-        /*            TwitterExtraction extract = null;                     
-                    double c = 1;
-                    double size =5;
-                    if(reseauSocial.equals("twitter"))
-                    {
-                        updateMessage("Data extraction");
-                        extract = new TwitterExtraction (tasksExtraction.get(reseauSocial).getR(),""+tasksExtraction.get(reseauSocial).getL());                
-                        updateProgress(c,size);
-                        ++c;
-                    }
-                    else
-                    {
-                        try {
-                            throw new Exception("Other social media are not supported yet!");
-                        } catch (Exception ex) {
-                            Logger.getLogger(ExecutionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    extractAtt = extract;
-                    inverse = extract.integrationGraphInvers;
-                    keywords = extract.keywords_list;
-                    
-                    updateMessage("Leader's detection");
-                    PageRank twitter_rank = new PageRank(extract.integrationGraph.size());
-                    twitter_rank.fillIn(extract.list_followers, extract.integrationGraph);
-                    updateProgress(c,size);
-                    ++c;
-                    
-                    map = twitter_rank.map; //needed to show Graph when show graph is pressed;
-                    rank = twitter_rank.rankVector;
-                    
-                    
-                    updateMessage("Community Detection");
-                    BigClam com_algorithm = new BigClam(extract.runnableThread,twitter_rank.map,extract.runnableThread.size(),extract.integrationGraph,extract.integrationGraphInvers,extract.list_app);
-                    System.out.println("showing initial Matrix of appartenance");
-                    com_algorithm.showAppartenance1();
-                    com_algorithm.findCommunities(0.01,0.00001);                
-                    com_algorithm.communityAttribution(0.1);
-                    System.out.println("showing Matrix of appartenance after community detection");
-                    com_algorithm.showAppartenance1();//WE NEED THE FIRST SHOW APPARTENANCE, BEFORE THE SCND, BCZ IN THE 1RST WE ARE GETTING THE NAME OF EACH ACCOUNT
-                    com_algorithm.showAppartenance2();
-                    System.out.println("Here is the attribution of communities index ");
-                    for(Integer key:com_algorithm.keywordIndexName.keySet())
-                    {
-                        System.out.print(""+key+": "+com_algorithm.keywordIndexName.get(key)+"\n");
-                    }
-                    updateProgress(c,size);
-                    ++c;
-                    communityAttribution = com_algorithm.attribution_of_communities;
-                    communityNameAttribution = com_algorithm.attribution_communities_names; //needed to show in the pieChart he name of community not their equivalence;
-                    
-                    updateMessage("Attribution of leaders to communities");
-                    Leader_Community lc = new Leader_Community();
-                    lc.attributeLC(com_algorithm.attribution_of_communities,twitter_rank.rankVector);
-                    updateProgress(c,size);
-                    ++c;
-                    leaderC = lc;
-
-                    updateMessage("Detection of communitie's Opinion");
-        */
                     //////starting from here the run 
                     updateMessage("Collecting and analysing sentiment of users");
                     int c =1;
@@ -233,16 +167,10 @@ public class FXMLNewRunPageController implements Initializable {
                     //getting the reference to ArrayList<Communities>;
                     communities = opinionDetection.communities;
                     ++c;
-                    //statistique sur la taille 
-    ///                System.out.println();
                     updateMessage("Generating the results");
                     SondageGenerator sgenerator = new SondageGenerator(opinionDetection.communities,opinionDetection.attributionInvers,opinionDetection.keywordIndexName);
                     sgenerator.draw();
                     updateProgress(c,size);
-                    //ArrayList<PieChart.Data> data = sgenerator.fxDrawChartData();
-                    //data = sgenerator.fxDrawChartData();
-//                    //drawPieChart(data);
-                    ///pieChartId.getData().addAll(data);
                     return null;
                 }
             };
@@ -262,9 +190,6 @@ public class FXMLNewRunPageController implements Initializable {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
-        //this.drawPieChart(data);
-        //System.out.println("PieChart data:"+this.data.size());
-        //updatePieChart(data);
        }      
     }
     public void drawTabPane()
@@ -400,9 +325,6 @@ public class FXMLNewRunPageController implements Initializable {
             for(int i=0;i<this.leaderC.leaders_Attribution.get(key).size();++i){
                 long a = inverse.get(this.leaderC.leaders_Attribution.get(key).get(i));
                 jxl.write.Label l = new jxl.write.Label(0,rowPos+i+1,Long.toString(a),cellFormat);
-//                System.out.println("rank size:"+rank.size());
-//                System.out.println("rank.get(i): "+ rank.get(6));
-//                System.out.println("\n \ntesting leaderC.leaders_Attribution.get(key): "+leaderC.leaders_Attribution.get(key).get(i));
                 jxl.write.Label l1 = new jxl.write.Label(1,rowPos+i+1,Double.toString(rank.get(this.leaderC.leaders_Attribution.get(key).get(i))),cellFormat);
                 try{
                     writablesheet.addCell(l);
@@ -417,19 +339,6 @@ public class FXMLNewRunPageController implements Initializable {
     @FXML
     public void printHandle() throws IOException
     {
-     /*   FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLExploredPage.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        
-        FXMLExploredPageController controller = (FXMLExploredPageController) fxmlLoader.getController();
-      
-        System.out.println("\n size of communities"+communities.size());
-        Stage stage = new Stage();
-        stage.setTitle("Actions");
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        System.out.println("Actions closed");
-    */
-    
     }
     
     @FXML
@@ -453,7 +362,6 @@ public class FXMLNewRunPageController implements Initializable {
     @FXML
     public void showGraphHandle()
     {
-        //DrawGraph graphDrawer = new DrawGraph(this.map,this.communities);
         DrawGraph graphDrawer = new DrawGraph(this.map,this.com_algorithm.attribution_of_communites_showGraph);
     }
     public void drawPieChart(ArrayList<PieChart.Data> data)
@@ -516,142 +424,3 @@ public class FXMLNewRunPageController implements Initializable {
         this.communityNameAttribution = communityNameAttribution;
     }    
 }
-/*
-
-            
-            
-            final NumberAxis xAxis = new NumberAxis();
-            final CategoryAxis yAxis = new CategoryAxis();
-            // String styleSheetURL = "javafxapplication3.chartPie.css";
-
-            final BarChart<Number,String> bc = new BarChart<Number,String>(xAxis,yAxis);
-
-         //       bc.getStylesheets().add((new File(styleSheetURL)).toURI().toURL().toExternalForm());            
-
-            bc.setLegendVisible(true);
-
-            bc.setMaxSize(600, 400);
-            bc.setPrefSize(600, 400);
-            bc.setMinSize(600, 400);
-
-            bc.setTitle("Opinions of Communities");
-            xAxis.setLabel("Community");       
-            yAxis.setLabel("Opinion");
-
-            for(Community com: communities)
-            {
-                //HashMap<String,HashMap<String,Double>> car = com.caracteristiques;
-                //HashMap<String,Double> location = car.get("Location");//se rassurer de Location;
-                ArrayList<String> opinionList = com.opinions;
-                String opinion = opinionList.get(index);
-                
-                XYChart.Series seriesCom = new XYChart.Series();
-                seriesCom.setName(com.name);
-                System.out.println("\n affichage des opinions de:"+com.name+ "\n");
-//                for(String val: location.keySet())
-//                {
-//                    System.out.print(val + " :"+location.get(val)+"  , ");                
-//                    seriesCom.getData().add(new XYChart.Data(val, location.get(val)));            
-//                }
-                int nmbr = 0;
-                if(opinion.equals("positive"))
-                    nmbr =1;
-                if(opinion.equals("negative"))
-                    nmbr = -1;
-                if(opinion.equals("neutral"))
-                    nmbr = 0;
-                if(opinion.equals(""))
-                    nmbr = -10;
-                seriesCom.getData().add(new XYChart.Data(0,opinion));
-                bc.getData().addAll(seriesCom);    
-            }
-            tab.setContent(bc);
-            this.tabPaneId.getTabs().add(tab);
-        }   
-*/
-
-/*
-
-   public void drawTabPane()
-    {
-        //i will create tabs as much as we have keywordsOrigin;
-        //in each tab i will create a BarChart to show the opinion of each comm;
-        HashMap<Integer,String> keywordIndex = opinionDetectionAtt.keywordIndexName;
-        ArrayList<String> keywords = opinionDetectionAtt.keywords;
-        //pour chaque keyword on cree un tab
-        for(Integer index: keywordIndex.keySet())
-        {
-            Tab tab = new Tab(""+keywordIndex.get(index));
-            //create datas for our barChart;
-            
-            ///////table
-            
-        TableView<ObservableList<String>>  tableView = new TableView();
-        tableView.setColumnResizePolicy(new Callback<TableView.ResizeFeatures,Boolean>(){
-
-            @Override
-            public Boolean call(TableView.ResizeFeatures param) {
-                return true;
-            }
-        });
-//        tableView.setMaxSize(600,400);
-//        tableView.setPrefSize(600, 400);
-//        tableView.setMinSize(600, 400);
-        tableView.getStylesheets().addAll(getClass().getResource("chartPie.css").toExternalForm());
-        
-//        int size = 10;
-        int size = 2; // 2 colonnes l'une vide , l'autre pour contenir le keyword 
-//        if(rank.size()<10)
-//           size = rank.size();
-
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
-        
-        ArrayList<String> headers = new ArrayList<>();
-        headers.add("");
-        headers.add("Keyword "+keywordIndex.get(index));
-//        for(int i=1;i<size+1;++i)
-//            headers.add("Leader"+i);
-        data.add(data.size(),headers);
-        
-        for(Community com: communities)
-        {
-            ArrayList<String> opinionList = com.opinions;
-            String opinion = opinionList.get(index);
-            ArrayList<String> marks = new ArrayList<>();
-            marks.add("community: "+this.communityNameAttribution.get(com.name));
-            marks.add(opinion);
-            data.add(data.size(),marks);
-        }
-
-        ObservableList<ObservableList<String>> dataObservable = FXCollections.observableArrayList();
-        for(int i=0;i<data.size();++i)
-        {
-            dataObservable.add(FXCollections.observableArrayList(data.get(i)));
-        }
-        tableView.setItems(dataObservable);
-        
-        for(int i=0;i<data.get(0).size();++i)
-        {
-            final int curCol = i;
-            final TableColumn<ObservableList<String>,String> column = new TableColumn<>(
-                    "Col " + (curCol+1)
-            );
-            column.setCellValueFactory(
-                    param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol))
-            );
-            tableView.getColumns().add(column);
-        }
-      
-//        Label tableTitle = new Label("TABLE TITLE");
-//        tableTitle.setLayoutX(384);
-  //      this.vboxId.getChildren().add(tableTitle);
-
-//        this.vboxId.getChildren().add(tableView);        
-            tab.setContent(tableView);
-            
-            //this.tabPaneId.getTabs().add(tab);
-            this.paneId.getTabs().add(tab);
-        }
-    }
-
-*/

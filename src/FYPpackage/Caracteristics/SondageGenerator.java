@@ -122,30 +122,4 @@ public class SondageGenerator {
         frame.setVisible(true);
         frame.setSize(450,500);
     }
-    public void chartPied3dDraw()
-    {
-        DefaultPieDataset pieDataset = new DefaultPieDataset();
-//      pieDataset.setValue("One", new Integer(10));
-//      pieDataset.setValue("Two", new Integer(20));
-//      pieDataset.setValue("Three", new Integer(30));
-//      pieDataset.setValue("Four",new Integer(40));
-        // create the chart...
-          
-        final JFreeChart chart = ChartFactory.createPieChart3D(
-        "Pie Chart 3D Demo 1",  // chart title
-        pieDataset,                // data
-        true,                   // include legend
-        true,
-        false);
-
-        final PiePlot3D plot = (PiePlot3D) chart.getPlot();
-        plot.setStartAngle(290);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.5f);
-        plot.setNoDataMessage("No data to display");
-        
-        // add the chart to a panel...
-        final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-    }
 }

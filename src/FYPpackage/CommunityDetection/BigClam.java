@@ -210,14 +210,7 @@ public class BigClam {
             return true;
         else
             return false;
-//        for(int i=0;i<gradient.size();++i){
-//            if(Math.abs(gradient.get(i))<epsinum)
-//                result ++;
-//        }
-//        if(result==gradient.size())
-//            return true;
-//        else
-//            return false;
+
     }
     public boolean isStable(ArrayList<Double> gradient,double epsinum,int iteration,int index,double oldLogFu,double newLogFu)
     {
@@ -532,44 +525,18 @@ public class BigClam {
         double newLogFu = 0;
         while(ecart>eps)
         {
-            
-            //ArrayList<ArrayList<Double>> old = (ArrayList<ArrayList<Double>>) this.appartenance.clone();
-            //ArrayList<ArrayList<Double>> old = new ArrayList<>(this.appartenance);
             ArrayList<ArrayList<Double>> old = new ArrayList<>();
-            //Collections.copy(old, appartenance);
+
             if(!CollectionsModified.copy(old, appartenance))
                 System.out.println("couldn't copy the appartenance");
-                    //.stream().collect(Collectors.toList());
             oldLogFu = logFu();
             for(int i=0;i<appartenance.size();++i)
             {
-  //                  double oldLogFu = logFu(i);
-  //                  System.out.print(" \n oldLog(F"+i+"):"+oldLogFu+"   ");
-
                     ArrayList<Double> lap = getGradient(i);
                     addVectorParticular(appartenance.get(i),product_Factor(lap,beta));
                     updateSigmaFv(lap,beta);
-  //                  double newLogFu = logFu(i);
-  //                 // System.out.print(" newLog(F"+i+"):"+newLogFu+"\n");
-
-  //                  if(!isStable(lap,eps,iteration,i,oldLogFu,newLogFu))
-  //                  {
-  //                      System.out.println("\n not stable");
-  //                  }
-  //                  else
-  //                  {
-  //                          System.out.println("after "+iteration+" rst iteration at index:"+i+" we found convergence \n");
-
-  //                          System.out.println("");
-  //                          break;
-
-   //                 }
-
- //                   if(i==appartenance.size()-1)
- //                      ++iteration;
             }
             newLogFu = logFu();
-            //ecart = normOne(matrixDif(old,this.appartenance))/normOne(old);
             ecart = Math.abs(newLogFu-oldLogFu)/Math.abs(oldLogFu);
             System.out.println("ecart:"+ecart);
             
@@ -581,7 +548,6 @@ public class BigClam {
     public static void main(String []argv)
     {
         ArrayList<Double> l = new ArrayList<>();
-        //ArrayList<Double> lc = (ArrayList<Double>)l.clone();
         ArrayList<Double> lc = new ArrayList<>(l);
         l.add((double)1);
         System.out.println("size of l:"+l.size()+" and size of lc:"+lc.size());
@@ -593,29 +559,16 @@ public class BigClam {
         int iteration = 1;
         int k=0;
         int nombre =0;
-            //for(int i=0;i<appartenance.size();++i)
             for(int i=0;i>=0;i=0+k%appartenance.size())
             {
                 double oldLogFu = logFu(i);
                 System.out.print(" \n oldLog(F"+i+"):"+oldLogFu+"   ");
                 
                 ArrayList<Double> lap = getGradient(i);
-                /*if(!isStable(lap,eps,iteration,i))
-                {
-                  //  System.out.print("\n row "+i+" modified");
-                   addVectorParticular(appartenance.get(i),product_Factor(lap,beta));
-                }
-                else
-                {
-                 //   System.out.print("\n at row "+i+" algorithm was stopped");
-                    break;
-                }
-                */
                 addVectorParticular(appartenance.get(i),product_Factor(lap,beta));
                 updateSigmaFv(lap,beta);
                 
                 double newLogFu = logFu(i);
-                //System.out.print(" newLog(F"+i+"):"+newLogFu+"\n");
                 System.out.println("\n ecart:"+Math.abs(newLogFu-oldLogFu));
                 if(!isStable(lap,eps,iteration,i,oldLogFu,newLogFu))
                 {
@@ -623,16 +576,11 @@ public class BigClam {
                 }
                 else
                 {
-                   // if(nombre >= appartenance.size())
-                   // {
                         System.out.println("after "+iteration+" rst iteration at index:"+i+" we found convergence \n");
         
                         System.out.println("");
                         break;
                     
-                    //}
-                   // else
-                     //   ++nombre;
                 }
 
                 if(i==appartenance.size()-1)
@@ -742,25 +690,3 @@ public class BigClam {
     }
     
 }
-
-/*
-        for(String key : communities.keySet()){
-          //for(int i=0;i<this.communities.size();++i){  
-//            if(!nodeVertex.containsKey(key)){
-//                nodeVertex.put(key, s+k);
-//                k++;
-//                s="s";
-//            }
-            //ArrayList<Integer> members = this.communities.get(i).members;
-            ArrayList<Integer> members = this.communities.get(key);
-            //for(int j=0;j<graph.get(key).size();++j){
-            for(int j=0;j<members.size();++j){  
-                if(!nodeVertex.containsKey(members.get(j))){
-                    //nodeVertex.put(graph.get(key).get(j), s+k);
-                    nodeVertex.put(members.get(j), s+members.get(j));
-                    k++;
-                    s="s";
-                }
-            }
-        }
-*/

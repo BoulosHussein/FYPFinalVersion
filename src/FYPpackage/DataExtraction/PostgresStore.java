@@ -45,22 +45,15 @@ public class PostgresStore extends Store{
 
         try {
 
-          //  Long followed = new Long("123");
             ArrayList<Long>followers = new ArrayList<>();
-          //  followers.add(new Long("3434"));
             con = DriverManager.getConnection(url, user, password);
 
             String stm = "select id from followed_followers";
             pst = con.prepareStatement(stm);
-            //Array inArray = con.createArrayOf("bigint", new Long[] {new Long("1222"),new Long("6666")});
-            //pst.setLong(1, followed);                    
-            //pst.setArray(2, inArray);
-            //pst.executeUpdate();
              ResultSet result = pst.executeQuery();
              while (result.next())
                 {
                     Long outArray = result.getLong("id");
-                    //Long[] r  =(Long[]) outArray.getArray();
                     followers.add(outArray);
                     
                 }
@@ -120,10 +113,6 @@ public class PostgresStore extends Store{
                     Array outArray = result.getArray("followers");
                     Long[] r  =(Long[]) outArray.getArray();
                     followers.addAll(Arrays.asList(r));
-                   // if(following==-1)
-                    //{
-                     //   following = result.getInt("following");
-                   // }
                 }
                 
                 try {
@@ -254,14 +243,9 @@ public class PostgresStore extends Store{
         try {
             pst = con.prepareStatement(stm);
             pst.setLong(1,followed_id);
-           
-            //Long[] ar =(Long[]) followers.toArray(Long.class);
-            //Long[] ar = followers.toArray(Long[]);
-            //long[] ar = followers.stream().mapToLong(l -> l).toArray();
             Long[] ar = followers.toArray(new Long[followers.size()]);
             Array inArray = con.createArrayOf("bigint",ar);
             pst.setArray(2, inArray);
-            //pst.executeQuery();
             pst.executeUpdate();
             
             System.out.println("storing in db followers of: "+followed_id);
@@ -282,9 +266,6 @@ public class PostgresStore extends Store{
             pst = con.prepareStatement(stm);
             pst.setLong(1,followed_id);
             pst.setInt(3, following);
-            //Long[] ar =(Long[]) followers.toArray(Long.class);
-            //Long[] ar = followers.toArray(Long[]);
-            //long[] ar = followers.stream().mapToLong(l -> l).toArray();
             Long[] ar = followers.toArray(new Long[followers.size()]);
             Array inArray = con.createArrayOf("bigint",ar);
             pst.setArray(2, inArray);

@@ -130,26 +130,13 @@ public class Extraction_thread implements Runnable {
                 if(status.getRemaining()>1)
                 {
                     try {
-                    //ids = twitter.getFollowersIDs(userId, cursor);
                       ids = extract.getFollowersIDs(userId, cursor);
                       succeed = true;
                     }catch(TwitterException ex) {
-                    //ca correspond a un account priver; ou le cursor est 0
-                    //l.add(new Long(-1));
-                        
-                   // if(following==-1)
-                    //    following=getFollowing(userId);
-                    //following = -1;
-                    
-                    //l.setR(following);
-                    //return l;
                     return  succeed; 
-                    //System.out.println("erreur a la ligne 91");
-                    //Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     l.addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
-                    //(l.getL()).addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
                 }
                 else
                 {
@@ -170,15 +157,7 @@ public class Extraction_thread implements Runnable {
                             } catch (TwitterException ex) {
                                //l'exception est en principe a cause du fait que cursor = 0 ou c un compte privee
                                 
-                                //if(following==-1)
-                                 //   following=getFollowing(userId);
-                                //following = -1;
-                                
-                                //l.setR(following);
                                  return succeed;
-                                //return l;
-                                
-                                //Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             l.addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
                             //(l.getL()).addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
@@ -195,18 +174,13 @@ public class Extraction_thread implements Runnable {
                         break;
                     }
                    try {
-                       //status = twitter.getRateLimitStatus("followers").get("/followers/ids");
                        status = extract.getRateLimitStatus("followers").get("/followers/ids");
                    } catch (TwitterException ex) {
-                        //    Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                         try {
                              // thread to sleep for 1000 milliseconds
                              System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                         
                              Thread.sleep(900000);
                              System.out.println("thread of "+this.keyword+ " woke up");
-                            // store.close();
-                             //store= new CassandraStore("twitter");
-                            // store= new PostgresStore("twitter");
                          }catch (Exception e) {
                              System.out.println(e);
                          }
@@ -218,13 +192,6 @@ public class Extraction_thread implements Runnable {
                break;
            }
        }
-     //  followers.put(userId, (ArrayList<Long>) l);
-       
-       //if(following==-1)
-        //    following=getFollowing(userId);
-       //following =-1;
-       
-      // l.setR(following);
        
        return succeed;
        //return l;
@@ -234,27 +201,16 @@ public class Extraction_thread implements Runnable {
        {
            //fetch them from db; 
         succeed = true;
-        //followers.put(userId,listFollowers);
            store= new PostgresStore("twitter");
-           //Pair<ArrayList<Long>,Integer> listFollowers = store.fetchFollowers(userId);
            ArrayList<Long> listFollowers =   store.fetchFollowers(userId);
            store.close();
-     //      if(following==-1)
-     //           following=getFollowing(userId);
-                    
-     //      listFollowers.setR(following);
            return succeed;
-           //return listFollowers;
        }
   
   
   }
    private List<Long> getFollowers(Long userId,int location) //if location ==1 we retrieve them from twitter, otherwise from db
-   //private Pair<ArrayList<Long>,Integer> getFollowers(Long userId,int location)
    {
-       //added to retrieve the following count;
-       //int following =-1;
-       //
        if(location==1)
        {
        long cursor=-1;
@@ -262,13 +218,10 @@ public class Extraction_thread implements Runnable {
        
        Boolean repeatLookup = true;
        List<Long> l = new ArrayList<>(); 
-       //Pair<ArrayList<Long>,Integer> l = new Pair<>(new ArrayList<>(),new Integer("-1"));
        RateLimitStatus status = null;
-      // String screenName="Gebran_Bassil";
        int k=0;
        Boolean getRateSleep = true;
        
-   //    followers.put(userId,new ArrayList<Long>());
        //objet a travers lesquelles on va faire nos query;
        TwitterDataExtraction extract;
          
@@ -295,14 +248,10 @@ public class Extraction_thread implements Runnable {
                             getRateSleep=false;
                            
                     }catch (TwitterException ex) {
-                          // Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                         try {
                             // thread to sleep for 1000 milliseconds
                             System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                            
                             Thread.sleep(900000);
-                        //    store.close();
-                            //store= new CassandraStore("twitter"); 
-                          //  store= new PostgresStore("twitter");
                             System.out.println("thread of "+this.keyword+ " woke up"); 
                         } catch (Exception e) {
                             System.out.println("erreur a la ligne 78");
@@ -316,24 +265,13 @@ public class Extraction_thread implements Runnable {
                 if(status.getRemaining()>1)
                 {
                     try {
-                    //ids = twitter.getFollowersIDs(userId, cursor);
                       ids = extract.getFollowersIDs(userId, cursor);
                       
                     }catch(TwitterException ex) {
                     //ca correspond a un account priver; ou le cursor est 0
-                    //l.add(new Long(-1));
-                        
-                   // if(following==-1)
-                    //    following=getFollowing(userId);
-                    //following = -1;
-                    
-                    //l.setR(following);
                     return  l; 
-                    //System.out.println("erreur a la ligne 91");
-                    //Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     l.addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
-                    //(l.getL()).addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
                 }
                 else
                 {
@@ -347,23 +285,13 @@ public class Extraction_thread implements Runnable {
                         if(cursor!=0)
                         {
                             try {
-                                //ids=twitter.getFollowersIDs(userId, cursor);
                                 ids = extract.getFollowersIDs(userId, cursor);
-                                //(ids.getNextCursor()
                             } catch (TwitterException ex) {
                                //l'exception est en principe a cause du fait que cursor = 0 ou c un compte privee
-                                
-                                //if(following==-1)
-                                 //   following=getFollowing(userId);
-                                //following = -1;
-                                
-                                //l.setR(following);
 
                                 return l;
-                                //Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             l.addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
-                            //(l.getL()).addAll(Arrays.asList(ArrayUtils.toObject(ids.getIDs())));
                         }
                         else
                         {
@@ -377,18 +305,13 @@ public class Extraction_thread implements Runnable {
                         break;
                     }
                    try {
-                       //status = twitter.getRateLimitStatus("followers").get("/followers/ids");
                        status = extract.getRateLimitStatus("followers").get("/followers/ids");
                    } catch (TwitterException ex) {
-                        //    Logger.getLogger(Extraction_thread.class.getName()).log(Level.SEVERE, null, ex);
                         try {
                              // thread to sleep for 1000 milliseconds
                              System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                         
                              Thread.sleep(900000);
                              System.out.println("thread of "+this.keyword+ " woke up");
-                            // store.close();
-                             //store= new CassandraStore("twitter");
-                            // store= new PostgresStore("twitter");
                          }catch (Exception e) {
                              System.out.println(e);
                          }
@@ -400,13 +323,6 @@ public class Extraction_thread implements Runnable {
                break;
            }
        }
-     //  followers.put(userId, (ArrayList<Long>) l);
-       
-       //if(following==-1)
-        //    following=getFollowing(userId);
-       //following =-1;
-       
-      // l.setR(following);
        
        return l;
        
@@ -415,15 +331,9 @@ public class Extraction_thread implements Runnable {
        {
            //fetch them from db; 
        
-        //followers.put(userId,listFollowers);
            store= new PostgresStore("twitter");
-           //Pair<ArrayList<Long>,Integer> listFollowers = store.fetchFollowers(userId);
            ArrayList<Long> listFollowers =   store.fetchFollowers(userId);
            store.close();
-     //      if(following==-1)
-     //           following=getFollowing(userId);
-                    
-     //      listFollowers.setR(following);
            
            return listFollowers;
        }
@@ -460,8 +370,6 @@ public class Extraction_thread implements Runnable {
    
    private void storeFollowers(Long idAccount,List<Long> followers,int location,int following) //if location ==-1 store them in db and followers else store them in followers
    {
-      // store = new MongoStore("FYP");
-        //store = new CassandraStore("twitter");
        
        if(location==-1){
            
@@ -476,8 +384,6 @@ public class Extraction_thread implements Runnable {
    }
    private void storeFollowers(Long idAccount,List<Long> followers,int location) //if location ==-1 store them in db and followers else store them in followers
    {
-      // store = new MongoStore("FYP");
-        //store = new CassandraStore("twitter");
        
        if(location==-1){
            
@@ -485,10 +391,8 @@ public class Extraction_thread implements Runnable {
             store.insert(idAccount,(ArrayList<Long>) followers);
             store.close();
        }
-       //Pair<ArrayList<Long>,Integer> followers_following = new Pair<>((ArrayList<Long>)followers,following);
        this.followers.put(idAccount, (ArrayList<Long>) followers);
        //added
-       //this.new_followers.put(idAccount,followers_following);
    }
  
    
@@ -548,14 +452,9 @@ public class Extraction_thread implements Runnable {
                         }
                         else
                         {
-                             //tempFollowedList.add(newFollowers);
-                             //following = newFollowers.getR();
-                             //storeFollowers(aTraiter,newFollowers.getL(),-1,following);
                              storeFollowers(aTraiter,newFollowers,-1);
-                             //pile.addAll(pile.size(),newFollowers.getL());
                              pile.addAll(pile.size(),newFollowers);
                              //added for BIGCLAM;
-                             //attribution.addAll(newFollowers.getL());
                              attribution.addAll(newFollowers);
                              //
                         }
@@ -564,29 +463,17 @@ public class Extraction_thread implements Runnable {
                    {
                        if(keyExist(aTraiter)==0) //its in the db and not in the hashMap
                        {
-                           //Pair<ArrayList<Long>,Integer> newFollowers = getFollowers(aTraiter,0);
-  //                         List<Long> newFollowers = getFollowers(aTraiter,0);
                             ArrayList<Long>  newFollowers = new ArrayList<>();
-                            //List<Long> newFollowers = getFollowers(aTraiter,1);
                             boolean publc = getFollowers(aTraiter,1,newFollowers);
-                            //Pair<ArrayList<Long>,Integer> newFollowers = getFollowers(aTraiter,1);
-                        //if(newFollowers.size()==0)
                             if(publc ==false)
-//                           if(newFollowers.size()==0)
-                           //if(newFollowers.getR()==-1)
                            {    //bcz we cannot retrieve the followers of a private account, so we dont save anything
                                 continue;
                            }
                            else
                            {
-                                //tempFollowedList.add(newFollowers);
-                                //following = newFollowers.getR();
-                                //storeFollowers(aTraiter,newFollowers.getL(),1,following);
                                storeFollowers(aTraiter,newFollowers,1); 
-                               //pile.addAll(pile.size(), newFollowers.getL());
                                 pile.addAll(pile.size(), newFollowers); 
                                 //added for BIGCLAM;
-                                   //attribution.addAll(newFollowers.getL());
                                    attribution.addAll(newFollowers);
                                 //
                            }
@@ -611,17 +498,7 @@ public class Extraction_thread implements Runnable {
                     {
                       if(keyExist(pile.get(j))==-1)
                       {
-                            //int folli = getFollowing(pile.get(j));  
-
-                            //if(folli == -1)
-                            //    continue;
-                            //else
-                           // {
                                 ArrayList<Long> folle = new ArrayList<>();
-       //                         Pair<ArrayList<Long>,Integer> f_f = new Pair<>(folle,folli);
-                              //  new_followers.put(pile.get(j), f_f);
-                              //  storeFollowers(pile.get(j),folle,1,folli); // i dnt have to save this results in the db, bcz we are not getting the right number of followers;
-                           // }
                                 storeFollowers(pile.get(j),folle,1);
                       }
                       else
@@ -629,10 +506,8 @@ public class Extraction_thread implements Runnable {
                           if(keyExist(pile.get(j))==0)
                           {
                               store= new PostgresStore("twitter");
-                              //Pair<ArrayList<Long>,Integer> s = store.fetchFollowers(pile.get(j));
                               ArrayList<Long> s = store.fetchFollowers(pile.get(j));
                               store.close();
-                              //storeFollowers(pile.get(j),s.getL(),1,s.getR());
                               storeFollowers(pile.get(j),s,1);
                               
                           }
@@ -668,8 +543,6 @@ public class Extraction_thread implements Runnable {
                     try{
                         //status = twitter.getRateLimitStatus("users").get("/users/lookup");
                         status = extract.getRateLimitStatus("users").get("/users/lookup");
-                        //twitter.getUserTimeline(aTraiter).get(0).getUser().getFriendsCount();
-                        //twitter.lookup(aTraiter).get(0).getUser().getFriendsCount();
                     }
                     catch(TwitterException ex2){
                         try {
@@ -677,8 +550,6 @@ public class Extraction_thread implements Runnable {
                                 System.out.println("thread of "+this.keyword+ " will sleep for 15 minutes while using "+i+" em application");                            
                                 Thread.sleep(900000);
                                 System.out.println("thread of "+this.keyword+ " woke up");
-                               // store.close();
-                               // store = new PostgresStore("twitter");
                                 continue;
                         }
                         catch(Exception e)

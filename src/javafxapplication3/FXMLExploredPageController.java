@@ -162,34 +162,6 @@ public class FXMLExploredPageController implements Initializable {
                     updateProgress(c,size);
                     ++c;
                     leaderC = lc;
-/*
-                    updateMessage("Detection of communitie's Opinion");
-                    Stage s = null;
-                    LeadersTimeline opinionDetection = new LeadersTimeline(s,lc.leaders_Attribution,tasksExtraction.get(reseauSocial).getR(),com_algorithm.keywordIndexName,extract.integrationGraphInvers,extract.list_app,true);
-                    opinionDetection.getOpinions(2);
-                    updateProgress(c,size);
-                    opinionDetectionAtt = opinionDetection;
-                                        
-                    System.out.println("c="+c);
-                    for(String key:opinionDetection.allOpinions.keySet())
-                    {
-                        System.out.print("Community "+key+": ("+opinionDetection.allOpinions.get(key).get(0)+","+opinionDetection.allOpinions.get(key).get(1)+") | community Size: "+opinionDetection.communityAttribution.get(key).size()+" \n");
-                    }
-                    System.out.println();
-                    for(int k=0;k<opinionDetection.communities.size();++k)
-                        opinionDetection.communities.get(k).show();    
-
-                    //getting the reference to ArrayList<Communities>;
-                    communities = opinionDetection.communities;
-                    //statistique sur la taille 
-    ///                System.out.println();
-                    SondageGenerator sgenerator = new SondageGenerator(opinionDetection.communities,opinionDetection.attributionInvers,opinionDetection.keywordIndexName);
-                    sgenerator.draw();
-                    //ArrayList<PieChart.Data> data = sgenerator.fxDrawChartData();
-                    data = sgenerator.fxDrawChartData();
-//                    //drawPieChart(data);
-                    ///pieChartId.getData().addAll(data);
-                   */
                     return null;
                 }
             };
@@ -221,7 +193,6 @@ public class FXMLExploredPageController implements Initializable {
     {
          //
         
-        //TableView<ObservableList<String>>  tableView = new TableView();
         TableView<ObservableList<VBox>>  tableView = new TableView();        
         tableView.setColumnResizePolicy(new Callback<TableView.ResizeFeatures,Boolean>(){
 
@@ -240,20 +211,16 @@ public class FXMLExploredPageController implements Initializable {
         if(rank.size()<10)
            size = rank.size();
 
-        //ArrayList<ArrayList<String>> data = new ArrayList<>();
         ArrayList<ArrayList<VBox>> data = new ArrayList<>();
-        //ArrayList<String> headers = new ArrayList<>();
         ArrayList<VBox> headers = new ArrayList<>();
         VBox v = new VBox();
         v.getChildren().add(new Label("Communities"));
         headers.add(v);
-        //headers.add("");
         for(int i=1;i<size+1;++i){
             VBox vb = new VBox();
             vb.getChildren().add(new Label("Leader"+i));
             headers.add(vb);
         }
-            //headers.add("Leader"+i);
         data.add(data.size(),headers);
         HashMap<Integer,Double> top10 = new HashMap<>();
         int count = 1;
@@ -269,21 +236,14 @@ public class FXMLExploredPageController implements Initializable {
         for(String comm : communityAttribution.keySet())
         {        
             ArrayList<Integer> leaders = leaderC.leaders_Attribution.get(comm);
-            //ArrayList<String> marks = new ArrayList<>();
             ArrayList<VBox> marks = new ArrayList<>();
             VBox vbx = new VBox();
             vbx.getChildren().add(new Label(communityNameAttribution.get(comm)));
             marks.add(vbx);
-            //marks.add(this.communityNameAttribution.get(comm));
             for(int i=1;i<size+1;++i)
             {
-        //        if(leaders.contains(rank.get(i-1)))
-                //if(top10.containsKey(rank.get(i-1)))
-                //if(leaders.contains(top10,i,leaders))
                 if(commContainsTop10(top10,i,leaders))
                 {
-                    //marks.add(".");
-
                     VBox vbox = new VBox();
                     Image image = new Image(getClass().getResource("checkSmallBlack.png").toExternalForm());
                     ImageView iView = new ImageView(image);
@@ -337,9 +297,6 @@ public class FXMLExploredPageController implements Initializable {
         final NumberAxis yAxis = new NumberAxis();
        
         final BarChart<String,Number> bc = new BarChart<String,Number>(xAxis,yAxis);
-//        bc.getStylesheets().add(getClass().getResource("chartPie.css").toExternalForm());
-        //bc.applyCss();
- //       bc.getStylesheets().add((new File(styleSheetURL)).toURI().toURL().toExternalForm());            
         
         bc.setLegendVisible(true);
         
@@ -413,94 +370,9 @@ public class FXMLExploredPageController implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Run Page");
                 stage.setScene(new Scene(root1));  
-        /*        stage.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
-                    @Override
-                    public void handle(WindowEvent window) {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                controller.setTasksExtraction(tasksExtraction);
-                                controller.run();
-//                                controller.createStatistics();
-                                //controller.setTaskExtraction(tasksExtraction);
-                                //controller.run();
-                            }
-                        });
-                    }
-                });
-          */
                 stage.show();
                 System.out.println("Run page closed");
 
         
     }
 }
-/*
-
-
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
-        
-        ArrayList<String> headers = new ArrayList<>();
-        headers.add("");
-        for(int i=1;i<size+1;++i)
-            headers.add("Leader"+i);
-        data.add(data.size(),headers);
-        HashMap<Integer,Double> top10 = new HashMap<>();
-        int count = 1;
-        
-        for(Integer key: this.rankedLeaders.keySet())
-        {
-            if(count>10)
-                break;
-            top10.put(key, this.rankedLeaders.get(key));
-            ++count;
-        }
-        
-        for(String comm : communityAttribution.keySet())
-        {        
-            ArrayList<Integer> leaders = leaderC.leaders_Attribution.get(comm);
-            ArrayList<String> marks = new ArrayList<>();
-            marks.add(this.communityNameAttribution.get(comm));
-            for(int i=1;i<size+1;++i)
-            {
-        //        if(leaders.contains(rank.get(i-1)))
-                //if(top10.containsKey(rank.get(i-1)))
-                //if(leaders.contains(top10,i,leaders))
-                if(commContainsTop10(top10,i,leaders))
-                {
-                    marks.add(".");
-                }
-                else
-                {
-                    marks.add("-");
-                }
-            }
-            data.add(data.size(),marks);
-        }
-
-        ObservableList<ObservableList<String>> dataObservable = FXCollections.observableArrayList();
-        for(int i=0;i<data.size();++i)
-        {
-            dataObservable.add(FXCollections.observableArrayList(data.get(i)));
-        }
-        tableView.setItems(dataObservable);
-        
-        for(int i=0;i<data.get(0).size();++i)
-        {
-            final int curCol = i;
-            final TableColumn<ObservableList<String>,String> column = new TableColumn<>(
-                    "Col " + (curCol+1)
-            );
-            column.setCellValueFactory(
-                    param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol))
-            );
-            tableView.getColumns().add(column);
-        }
-      
-        Label tableTitle = new Label("                                                              Representing membership of top"+size+" leaders"); //pour centrer le label
-        tableTitle.setLayoutX(384);
-        this.vboxId.getChildren().add(tableTitle);
-
-        this.vboxId.getChildren().add(tableView);        
-        //
-*/
